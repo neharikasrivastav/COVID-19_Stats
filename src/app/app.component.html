@@ -1,0 +1,47 @@
+<div class="heading">
+    <div class="container">
+        <div class="Navbar" style="animation-delay: 0.5s; transition: all 0.3s ease-in-out 0s;">
+            <img class="fadeInUp img-circle logo" alt="COVID-19 Tracker" src="/assets/logoo.png" style="animation-delay: 0s; transition: all 0.3s ease-in-out 0s;">
+            <div class="navbar-left">
+                
+                <a routerLink="/home" routerLinkActive="active">
+                    <span class="fadeInUp" style="animation-delay: 0.2s;"> <img src="/assets/homee.png" style="width: 32px; height: 32px;">Home</span>
+                </a>
+                <a routerLink="/helpful" routerLinkActive="active">
+                    <span class="fadeInUp " style="animation-delay: 0.5s;"><img src="/assets/link.png" style="width: 32px; height: 32px;">Helpline Links</span>
+                </a>
+                <a routerLink="/charts" routerLinkActive="active">
+                    <span class="fadeInUp " style="animation-delay: 0.5s;"><img src="/assets/graph.png" style="width: 32px; height: 32px;">charts</span>
+                </a>
+                
+
+
+            </div>
+           
+        </div>
+    </div>
+    <div class="Banner fadeInUp" style="animation-delay: 0.2s;">
+        <div class="snippet" *ngIf="BannerData else noBanner">{{BannerData}} &nbsp;</div>
+        <ng-template #noBanner>
+            <div class="snippet">#BreakTheChain of unverified WhatsApp forwards which spread wrong information! Do not forward unless you verify it.</div>
+        </ng-template>
+
+    </div>
+</div>
+
+    
+
+<router-outlet></router-outlet>
+<div class="container">
+
+
+    <footer class="fadeInUp col-md-12" style="animation-delay: 2s;">
+        <h5><img src="/assets/mask.png">STAY HOME STAY SAFE FIGHT WITH UNITY<img src="/assets/mask.png"></h5>
+        
+
+
+    </footer>
+
+</div>
+
+<h5 class="text-center" style="margin-bottom: 0;font-size: 13px; padding: 30px;  color:rgb(20, 13, 13);font-weight: 700;background-color: rgb(195, 195, 219);"> We stand with everyone fighting on the frontlines</h5>
