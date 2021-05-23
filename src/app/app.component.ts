@@ -10,6 +10,7 @@ import { Subscription, BehaviorSubject, interval } from 'rxjs';
 
 
 export class AppComponent implements OnInit {
+  
   title = 'covoid19';
   BannerDataList: any;
   BannerData = "Be a true Indian. Show compassion. Be considerate. Help those in need. We will get through this!"
@@ -22,6 +23,7 @@ export class AppComponent implements OnInit {
 
   
   ngOnInit(): void {
+    this.cs.fetchToken();
     this.cs.getBanners().subscribe(data => {
       this.BannerDataList = data.factoids.map(item => {
         return item.banner

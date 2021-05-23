@@ -6,41 +6,14 @@ import { chartsservice } from './charts.service';
 import db from '../app/db.json';
 import { Observable, BehaviorSubject, Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { CoronaService } from '../shared/corona.service';
 @Component({
   selector: 'app-charts',
   templateUrl: './charts.component.html',
   styleUrls: ['./charts.component.css']
 })
 export class ChartsComponent implements OnInit {
-  jsonfile1=[
-    {"Date_YMD": "2020-03-14", "States": "Total_India", "Confirmed": 81, "Recovered": 9, "Deceased": 2, "ICMR_RTPCR": 0.0, "Vaccine_Doses_administered": 0},
-    {"Date_YMD": "2020-03-15", "States": "Total_India", "Confirmed": 27, "Recovered": 4, "Deceased": 0, "ICMR_RTPCR": 0.0, "Vaccine_Doses_administered": 0},
-    {"Date_YMD": "2020-03-16", "States": "Total_India", "Confirmed": 15, "Recovered": 1, "Deceased": 0, "ICMR_RTPCR": 0.0, "Vaccine_Doses_administered": 0},
-    {"Date_YMD": "2020-03-17", "States": "Total_India", "Confirmed": 11, "Recovered": 1, "Deceased": 1, "ICMR_RTPCR": 0.0, "Vaccine_Doses_administered": 0},
-   {"Date_YMD": "2020-03-18", "States": "Total_India", "Confirmed": 37, "Recovered": 0, "Deceased": 0, "ICMR_RTPCR": 0.0, "Vaccine_Doses_administered": 0},
-    {"Date_YMD": "2020-03-19", "States": "Total_India", "Confirmed": 27, "Recovered": 5, "Deceased": 1, "ICMR_RTPCR": 0.0, "Vaccine_Doses_administered": 0},
-   {"Date_YMD": "2020-03-20", "States": "Total_India", "Confirmed": 58, "Recovered": 3, "Deceased": 0, "ICMR_RTPCR": 0.0, "Vaccine_Doses_administered": 0},
-    {"Date_YMD": "2020-03-21", "States": "Total_India", "Confirmed": 78, "Recovered": 0, "Deceased": 0, "ICMR_RTPCR": 0.0, "Vaccine_Doses_administered": 0},
-    {"Date_YMD": "2020-03-22", "States": "Total_India", "Confirmed": 67, "Recovered": 0, "Deceased": 3, "ICMR_RTPCR": 0.0, "Vaccine_Doses_administered": 0},
-   {"Date_YMD": "2020-03-23", "States": "Total_India", "Confirmed": 102, "Recovered": 12, "Deceased": 2, "ICMR_RTPCR": 0.0, "Vaccine_Doses_administered": 0},
-   {"Date_YMD": "2020-03-24", "States": "Total_India", "Confirmed": 64, "Recovered": 5, "Deceased": 1, "ICMR_RTPCR": 0.0, "Vaccine_Doses_administered": 0},
-   {"Date_YMD": "2020-03-25", "States": "Total_India", "Confirmed": 90, "Recovered": 3, "Deceased": 1, "ICMR_RTPCR": 0.0, "Vaccine_Doses_administered": 0},
-   {"Date_YMD": "2021-04-16", "States": "Total_India", "Confirmed": 234002, "Recovered": 122886, "Deceased": 1338, "ICMR_RTPCR": 286854303.0, "Vaccine_Doses_administered": 119937641},
-    {"Date_YMD": "2021-04-17", "States": "Total_India", "Confirmed": 260895, "Recovered": 138209, "Deceased": 1498, "ICMR_RTPCR": 288754153.0, "Vaccine_Doses_administered": 122622590},
-    {"Date_YMD": "2021-04-18", "States": "Total_India", "Confirmed": 275063, "Recovered": 143839, "Deceased": 1620, "ICMR_RTPCR": 290373311.0, "Vaccine_Doses_administered": 123852566},
-    {"Date_YMD": "2021-04-19", "States": "Total_India", "Confirmed": 257003, "Recovered": 154357, "Deceased": 1757, "ICMR_RTPCR": 292317977.0, "Vaccine_Doses_administered": 127129113},
-    {"Date_YMD": "2021-04-20", "States": "Total_India", "Confirmed": 294365, "Recovered": 166656, "Deceased": 2021, "ICMR_RTPCR": 293967292.0, "Vaccine_Doses_administered": 130119310},
-   {"Date_YMD": "2021-04-21", "States": "Total_India", "Confirmed": 315752, "Recovered": 179434, "Deceased": 2101, "ICMR_RTPCR": 295588857.0, "Vaccine_Doses_administered": 132330644},
-   {"Date_YMD": "2021-04-22", "States": "Total_India", "Confirmed": 332531, "Recovered": 192317, "Deceased": 2257, "ICMR_RTPCR": 298270977.0, "Vaccine_Doses_administered": 135478420},
-    {"Date_YMD": "2021-04-23", "States": "Total_India", "Confirmed": 345296, "Recovered": 220545, "Deceased": 2620, "ICMR_RTPCR": 300553094.0, "Vaccine_Doses_administered": 138379832},
-    {"Date_YMD": "2021-04-24", "States": "Total_India", "Confirmed": 348996, "Recovered": 215809, "Deceased": 2761, "ICMR_RTPCR": 302458129.0, "Vaccine_Doses_administered": 140916417},
-   {"Date_YMD": "2021-04-25", "States": "Total_India", "Confirmed": 354658, "Recovered": 218626, "Deceased": 2808, "ICMR_RTPCR": 304502099.0, "Vaccine_Doses_administered": 141911223},
-    {"Date_YMD": "2021-04-26", "States": "Total_India", "Confirmed": 319471, "Recovered": 249009, "Deceased": 2762, "ICMR_RTPCR": 306285603.0, "Vaccine_Doses_administered": 145271186},
-   {"Date_YMD": "2021-04-27", "States": "Total_India", "Confirmed": 362913, "Recovered": 262349, "Deceased": 3286, "ICMR_RTPCR": 308412803.0, "Vaccine_Doses_administered": 147827367},
-    {"Date_YMD": "2021-04-28", "States": "Total_India", "Confirmed": 379404, "Recovered": 274171, "Deceased": 3646, "ICMR_RTPCR": 310699380.0, "Vaccine_Doses_administered": 150020648}, 
-    {"Date_YMD": "2021-04-29", "States": "Total_India", "Confirmed": 386773, "Recovered": 291727, "Deceased": 3502, "ICMR_RTPCR": 312849350.0, "Vaccine_Doses_administered": 152245179}, 
-    {"Date_YMD": "2021-04-30", "States": "Total_India", "Confirmed": 402014, "Recovered": 299198, "Deceased": 3525, "ICMR_RTPCR": 315013538.0, "Vaccine_Doses_administered": 154989635}, 
-   {"Date_YMD": "2021-05-19", "States": "Total_India", "Confirmed": 276193, "Recovered": 369005, "Deceased": 3877, "ICMR_RTPCR": 354422968.0, "Vaccine_Doses_administered": 187009792}];
+  jsonfile1 = this.cs.jsonfile1;
   a:string;
   b:number;
   c:number;
@@ -261,25 +234,12 @@ export class ChartsComponent implements OnInit {
       this.columnNames3=["Date","RTPCR"];
       }
   
-  constructor(private jsonservice:chartsservice, public http:HttpClient) {
+  constructor(private jsonservice:chartsservice, public http:HttpClient, private cs:CoronaService) {
 }
   ngOnInit():void {
-    this.getData();
     this.fun();
   }
-  getData()
- {
-    this.http.get<jsonfile[]>('https://us-central1-tgs-internal-saige-dev-001.cloudfunctions.net/di_init_covid19_stats_access').subscribe
-  ((res)=>{
-    this.jsonfile1=this.jsonfile1.concat(res);
-    
-  })
   
-  }
-  
-
-   
-
 }
 
 
