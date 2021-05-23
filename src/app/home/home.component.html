@@ -13,7 +13,14 @@
                 </div>
             </div>
         </div>
-
+        <form (change)="selectChanger()">
+            <label for="bday">Enter Start Date
+              <input type="date" name="start" required pattern="\d{2}-\d{2}-\d{4}" >  Enter End Date
+              <input type="date" name="end" required pattern="\d{2}-\d{2}-\d{4}">
+              <span class="validity"></span>
+            </label>
+          </form>
+          
         <div class="container">
             <div class="row align-items-start">
                 <div class="Level fadeInUp row" style="animation-delay: 0.8s; ">
